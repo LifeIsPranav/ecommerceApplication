@@ -1,5 +1,6 @@
 import About from "./pages/About";
 import AdminDashboard from "./pages/admin/Dashboard";
+import AdminOrders from "./pages/admin/Orders";
 import AdminProducts from "./pages/admin/Products";
 import Cart from "./pages/Cart";
 import CartAuthSync from "./components/common/CartAuthSync";
@@ -99,6 +100,11 @@ function App() {
           <Route path="/admin/products" element={
             <ProtectedRoute adminOnly={true}>
               <AdminProducts />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/orders" element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminOrders />
             </ProtectedRoute>
           } />
 

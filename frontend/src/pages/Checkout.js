@@ -112,12 +112,12 @@ const Checkout = () => {
                       <h3 className="font-medium">{item.product.name}</h3>
                       <p className="text-gray-600">Quantity: {item.quantity}</p>
                     </div>
-                    <p className="font-semibold">${(item.product.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-semibold">₹{(item.product.price * item.quantity).toFixed(2)}</p>
                   </div>
                 ))}
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-xl font-bold">
-                    <span>Total: ${total.toFixed(2)}</span>
+                    <span>Total: ₹{total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>

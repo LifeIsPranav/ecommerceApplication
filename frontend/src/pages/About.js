@@ -14,7 +14,7 @@ const About = () => {
     {
       icon: TruckIcon,
       title: 'Free Shipping',
-      description: 'Free shipping on all orders over $100. Fast and reliable delivery worldwide.'
+      description: 'Free shipping on all orders over ₹8300. Fast and reliable delivery worldwide.'
     },
     {
       icon: ShieldCheckIcon,

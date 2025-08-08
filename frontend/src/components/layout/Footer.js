@@ -20,7 +20,7 @@ const Footer = () => {
                 <TruckIcon className="h-12 w-12 text-indigo-400" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Free Shipping</h3>
-              <p className="text-gray-400">Free shipping on orders over $100</p>
+              <p className="text-gray-400">Free shipping on orders over ₹8300</p>
             </div>
             
             <div className="text-center">

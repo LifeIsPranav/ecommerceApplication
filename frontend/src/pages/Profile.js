@@ -269,14 +269,14 @@ const Profile = () => {
                               <div className="flex-1">
                                 <p className="font-medium">{item.productName || item.name || 'Unknown Product'}</p>
                                 <p className="text-sm text-gray-600">
-                                  Quantity: {item.quantity || 1} × ${(item.unitPrice || item.price || 0).toFixed(2)}
+                                  Quantity: {item.quantity || 1} × ₹{(item.unitPrice || item.price || 0).toFixed(2)}
                                 </p>
                               </div>
                             </div>
                           ))}
                         </div>
                         <div className="mt-4 pt-4 border-t">
-                          <p className="font-semibold">Total: ${(order.totalAmount || order.totalPrice || 0).toFixed(2)}</p>
+                          <p className="font-semibold">Total: ₹{(order.totalAmount || order.totalPrice || 0).toFixed(2)}</p>
                         </div>
                       </div>
                     ))

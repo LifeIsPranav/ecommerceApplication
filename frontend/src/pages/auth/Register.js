@@ -356,7 +356,7 @@ const Register = () => {
             </h3>
             <div className="space-y-3">
               {[
-                'Free shipping on orders over $50',
+                'Free shipping on orders over ₹4150',
                 'Early access to sales and new products',
                 'Exclusive member-only discounts',
                 'Easy order tracking and returns',

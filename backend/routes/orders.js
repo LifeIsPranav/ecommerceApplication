@@ -503,4 +503,66 @@ router.put('/:id/status', protect, admin, async (req, res) => {
   }
 });
 
+// @desc    Update order status (Admin) - PATCH version
+// @route   PATCH /api/orders/admin/:id/status  
+// @access  Private/Admin
+router.patch('/admin/:id/status', protect, admin, async (req, res) => {
+  try {
+    const { status, note, trackingNumber } = req.body;
+
+    const validStatuses = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'returned'];
+    
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid status'
+      });
+    }
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    // Update order
+    order.status = status;
+    if (trackingNumber) order.trackingNumber = trackingNumber;
+
+    // Add to status history
+    order.statusHistory.push({
+      status,
+      note,
+      updatedBy: req.user.id
+    });
+
+    // Set delivery date if status is delivered
+    if (status === 'delivered') {
+      order.actualDeliveryDate = new Date();
+    }
+
+    await order.save();
+
+    const populatedOrder = await Order.findById(order._id)
+      .populate('user', 'name email')
+      .populate('items.product', 'name slug');
+
+    res.status(200).json({
+      success: true,
+      message: 'Order status updated successfully',
+      order: populatedOrder
+    });
+  } catch (error) {
+    console.error('Update order status error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update order status',
+      error: error.message
+    });
+  }
+});
+
 module.exports = router;

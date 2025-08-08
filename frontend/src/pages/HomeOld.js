@@ -31,7 +31,7 @@ const Home = () => {
     {
       icon: TruckIcon,
       title: 'Free Shipping',
-      description: 'Free shipping on orders over $100'
+      description: 'Free shipping on orders over ₹8300'
     },
     {
       icon: ShieldCheckIcon,

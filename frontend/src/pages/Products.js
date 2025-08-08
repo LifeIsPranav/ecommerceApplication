@@ -355,7 +355,7 @@ const Products = () => {
                   />
                   <div className="flex justify-between text-sm text-gray-600">
                     <span>$0</span>
-                    <span>${localFilters.priceRange[1]}</span>
+                    <span>₹{localFilters.priceRange[1]}</span>
                   </div>
                 </div>
               </div>
