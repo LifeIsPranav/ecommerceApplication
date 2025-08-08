@@ -21,7 +21,7 @@ const Checkout = () => {
     phone: ''
   });
 
-  const [paymentMethod, setPaymentMethod] = useState('card');
+  const [paymentMethod, setPaymentMethod] = useState('cod');
 
   const handleInputChange = (e) => {
     setShippingInfo({
@@ -57,7 +57,14 @@ const Checkout = () => {
       if (result.type === 'orders/createOrder/fulfilled') {
         clearCart();
         toast.success('Order placed successfully!');
-        navigate('/orders');
+        navigate('/order-success', { 
+          state: { 
+            orderData: {
+              ...orderData,
+              orderId: result.payload?._id
+            }
+          } 
+        });
       }
     } catch (error) {
       toast.error('Failed to place order');
@@ -209,34 +216,16 @@ const Checkout = () => {
                   <input
                     type="radio"
                     name="paymentMethod"
-                    value="card"
-                    checked={paymentMethod === 'card'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="mr-2"
-                  />
-                  Credit/Debit Card
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="paypal"
-                    checked={paymentMethod === 'paypal'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="mr-2"
-                  />
-                  PayPal
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
                     value="cod"
                     checked={paymentMethod === 'cod'}
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="mr-2"
+                    readOnly
                   />
-                  Cash on Delivery
+                  <div className="flex items-center">
+                    <span className="font-medium">Cash on Delivery</span>
+                    <span className="ml-2 text-sm text-gray-600">(Pay when your order arrives)</span>
+                  </div>
                 </label>
               </div>
             </div>
@@ -253,7 +242,7 @@ const Checkout = () => {
                   <span className="ml-2">Placing Order...</span>
                 </>
               ) : (
-                'Place Order'
+                'Place Order (Cash on Delivery)'
               )}
             </button>
           </form>

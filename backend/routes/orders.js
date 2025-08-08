@@ -16,31 +16,60 @@ router.post('/dummy', protect, async (req, res) => {
     
     const { orderItems, shippingInfo, paymentMethod, totalPrice } = req.body;
     
-    // Create a simple dummy order
-    const dummyOrder = {
-      _id: new Date().getTime().toString(), // Simple ID
+    // Create and save a real order to database
+    const orderData = {
+      orderNumber: `ORD-${Date.now()}`,
       user: req.user.id,
-      orderItems: orderItems || [],
-      shippingInfo: shippingInfo || {},
-      paymentMethod: paymentMethod || 'dummy',
-      totalPrice: totalPrice || 0,
-      status: 'processing',
-      createdAt: new Date(),
-      orderNumber: `ORD-${Date.now()}`
+      items: orderItems.map(item => ({
+        product: item.product,
+        productName: item.name,
+        productImage: { url: item.image },
+        quantity: item.quantity,
+        unitPrice: item.price,
+        totalPrice: item.price * item.quantity
+      })),
+      subtotal: totalPrice || 0,
+      totalAmount: totalPrice || 0,
+      shippingAddress: {
+        firstName: req.user.name?.split(' ')[0] || 'Customer',
+        lastName: req.user.name?.split(' ')[1] || 'Name',
+        addressLine1: shippingInfo.address || '',
+        city: shippingInfo.city || '',
+        state: shippingInfo.state || '',
+        zipCode: shippingInfo.zipCode || '',
+        country: shippingInfo.country || '',
+        phone: shippingInfo.phone || ''
+      },
+      billingAddress: {
+        firstName: req.user.name?.split(' ')[0] || 'Customer',
+        lastName: req.user.name?.split(' ')[1] || 'Name',
+        addressLine1: shippingInfo.address || '',
+        city: shippingInfo.city || '',
+        state: shippingInfo.state || '',
+        zipCode: shippingInfo.zipCode || '',
+        country: shippingInfo.country || '',
+        phone: shippingInfo.phone || ''
+      },
+      paymentMethod: paymentMethod === 'cod' ? 'cash_on_delivery' : 'credit_card',
+      paymentStatus: paymentMethod === 'cod' ? 'pending' : 'paid',
+      status: 'processing'
     };
+
+    const order = new Order(orderData);
+    const savedOrder = await order.save();
     
-    console.log('Created dummy order:', dummyOrder);
+    console.log('Created and saved order:', savedOrder);
     
     res.status(201).json({
       success: true,
-      message: 'Dummy order created successfully',
-      order: dummyOrder
+      message: 'Order created successfully',
+      order: savedOrder
     });
   } catch (error) {
-    console.error('Dummy order error:', error);
+    console.error('Order creation error:', error);
     res.status(500).json({
       success: false,
-      message: 'Failed to create dummy order',
+      message: 'Failed to create order',
       error: error.message
     });
   }
