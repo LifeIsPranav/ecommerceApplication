@@ -21,7 +21,8 @@ const sampleCategories = [
     slug: 'electronics',
     description: 'Latest electronic gadgets and devices',
     image: {
-      url: 'https://via.placeholder.com/100x100?text=Electronics'
+      public_id: 'categories/electronics',
+      url: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=400&fit=crop&crop=center'
     }
   },
   {
@@ -29,7 +30,8 @@ const sampleCategories = [
     slug: 'clothing',
     description: 'Fashion and apparel for all occasions',
     image: {
-      url: 'https://via.placeholder.com/100x100?text=Clothing'
+      public_id: 'categories/clothing',
+      url: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=400&fit=crop&crop=center'
     }
   },
   {
@@ -37,15 +39,17 @@ const sampleCategories = [
     slug: 'books',
     description: 'Wide selection of books and literature',
     image: {
-      url: 'https://via.placeholder.com/100x100?text=Books'
+      public_id: 'categories/books',
+      url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop&crop=center'
     }
   },
   {
     name: 'Home & Garden',
     slug: 'home-garden',
-    description: 'Everything for your home and garden',
+    description: 'Everything for your home and garden needs',
     image: {
-      url: 'https://via.placeholder.com/100x100?text=Home'
+      public_id: 'categories/home-garden',
+      url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&crop=center'
     }
   }
 ];
@@ -59,14 +63,14 @@ const sampleProducts = [
     sku: 'IPHONE15PRO',
     images: [{ 
       public_id: 'iphone15pro',
-      url: 'https://via.placeholder.com/400x400?text=iPhone+15+Pro',
+      url: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&crop=center',
       alt: 'iPhone 15 Pro',
       isMain: true
     }],
     inventory: { quantity: 50 },
     status: 'active',
     featured: true,
-    tags: ['smartphone', 'phone', 'apple', 'premium', 'mobile']
+    tags: ['smartphone', 'phone', 'apple', 'premium', 'mobile', 'electronics']
   },
   {
     name: 'MacBook Air M3',
@@ -76,14 +80,14 @@ const sampleProducts = [
     sku: 'MACBOOK-AIR-M3',
     images: [{ 
       public_id: 'macbook-air-m3',
-      url: 'https://via.placeholder.com/400x400?text=MacBook+Air',
+      url: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop&crop=center',
       alt: 'MacBook Air M3',
       isMain: true
     }],
     inventory: { quantity: 30 },
     status: 'active',
     featured: true,
-    tags: ['laptop', 'apple', 'professional', 'computer', 'macbook']
+    tags: ['laptop', 'apple', 'professional', 'computer', 'macbook', 'electronics']
   },
   {
     name: 'AirPods Pro',
@@ -93,14 +97,14 @@ const sampleProducts = [
     sku: 'AIRPODS-PRO',
     images: [{ 
       public_id: 'airpods-pro',
-      url: 'https://via.placeholder.com/400x400?text=AirPods+Pro',
+      url: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=400&h=400&fit=crop&crop=center',
       alt: 'AirPods Pro',
       isMain: true
     }],
     inventory: { quantity: 100 },
     status: 'active',
     featured: true,
-    tags: ['earbuds', 'wireless', 'apple', 'headphones', 'audio']
+    tags: ['earbuds', 'wireless', 'apple', 'headphones', 'audio', 'electronics']
   },
   {
     name: 'Cotton T-Shirt',
@@ -110,14 +114,14 @@ const sampleProducts = [
     sku: 'COTTON-TSHIRT',
     images: [{ 
       public_id: 'cotton-tshirt',
-      url: 'https://via.placeholder.com/400x400?text=T-Shirt',
+      url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop&crop=center',
       alt: 'Cotton T-Shirt',
       isMain: true
     }],
     inventory: { quantity: 200 },
     status: 'active',
     featured: false,
-    tags: ['clothing', 'cotton', 'casual']
+    tags: ['clothing', 'cotton', 'casual', 'shirt']
   },
   {
     name: 'Programming Book Collection',
@@ -127,14 +131,14 @@ const sampleProducts = [
     sku: 'PROG-BOOKS',
     images: [{ 
       public_id: 'programming-books',
-      url: 'https://via.placeholder.com/400x400?text=Programming+Books',
+      url: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=400&fit=crop&crop=center',
       alt: 'Programming Books',
       isMain: true
     }],
     inventory: { quantity: 75 },
     status: 'active',
     featured: true,
-    tags: ['books', 'programming', 'education']
+    tags: ['books', 'programming', 'education', 'learning']
   },
   {
     name: 'Smart Garden Kit',
@@ -144,14 +148,14 @@ const sampleProducts = [
     sku: 'SMART-GARDEN',
     images: [{ 
       public_id: 'smart-garden',
-      url: 'https://via.placeholder.com/400x400?text=Smart+Garden',
+      url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&crop=center',
       alt: 'Smart Garden Kit',
       isMain: true
     }],
     inventory: { quantity: 25 },
     status: 'active',
     featured: true,
-    tags: ['garden', 'smart', 'indoor']
+    tags: ['garden', 'smart', 'indoor', 'home']
   }
 ];
 
@@ -183,11 +187,21 @@ const seedDatabase = async () => {
     const createdProducts = [];
     for (const productData of sampleProducts) {
       try {
-        // Find the appropriate category
-        const category = categories.find(cat => 
-          productData.tags.some(tag => cat.name.toLowerCase().includes(tag)) ||
-          cat.name.toLowerCase() === 'electronics' // default for tech products
-        ) || categories[0]; // fallback to first category
+        // Find the appropriate category based on product tags
+        let category;
+        
+        if (productData.tags.includes('electronics')) {
+          category = categories.find(cat => cat.name === 'Electronics');
+        } else if (productData.tags.includes('clothing')) {
+          category = categories.find(cat => cat.name === 'Clothing');
+        } else if (productData.tags.includes('books')) {
+          category = categories.find(cat => cat.name === 'Books');
+        } else if (productData.tags.includes('home') || productData.tags.includes('garden')) {
+          category = categories.find(cat => cat.name === 'Home & Garden');
+        } else {
+          // Default fallback
+          category = categories[0];
+        }
         
         console.log(`Creating product ${productData.name} with category ${category.name}`);
         

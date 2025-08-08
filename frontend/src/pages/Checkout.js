@@ -45,7 +45,7 @@ const Checkout = () => {
           name: item.product.name,
           price: item.product.price,
           quantity: item.quantity,
-          image: item.product.images[0]
+          image: item.product?.images?.[0]?.url || '/placeholder-image.svg'
         })),
         shippingInfo,
         paymentMethod,
@@ -94,9 +94,12 @@ const Checkout = () => {
                 {items.map((item) => (
                   <div key={item.product._id} className="flex items-center space-x-4">
                     <img
-                      src={item.product.images[0]}
-                      alt={item.product.name}
+                      src={item.product?.images?.[0]?.url || '/placeholder-image.svg'}
+                      alt={item.product?.name || 'Product'}
                       className="w-16 h-16 object-cover rounded"
+                      onError={(e) => {
+                        e.target.src = '/placeholder-image.svg';
+                      }}
                     />
                     <div className="flex-1">
                       <h3 className="font-medium">{item.product.name}</h3>

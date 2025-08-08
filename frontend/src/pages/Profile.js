@@ -256,9 +256,12 @@ const Profile = () => {
                           {order.orderItems.map((item) => (
                             <div key={item._id} className="flex items-center space-x-4">
                               <img
-                                src={item.image}
+                                src={item.image || '/placeholder-image.svg'}
                                 alt={item.name}
                                 className="w-12 h-12 object-cover rounded"
+                                onError={(e) => {
+                                  e.target.src = '/placeholder-image.svg';
+                                }}
                               />
                               <div className="flex-1">
                                 <p className="font-medium">{item.name}</p>

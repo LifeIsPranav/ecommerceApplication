@@ -85,9 +85,12 @@ const Orders = () => {
                       {order.orderItems.map((item) => (
                         <div key={item._id} className="flex items-center space-x-4">
                           <img
-                            src={item.image}
+                            src={item.image || '/placeholder-image.svg'}
                             alt={item.name}
                             className="w-16 h-16 object-cover rounded-lg"
+                            onError={(e) => {
+                              e.target.src = '/placeholder-image.svg';
+                            }}
                           />
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-900">{item.name}</h4>
