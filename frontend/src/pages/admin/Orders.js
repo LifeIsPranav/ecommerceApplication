@@ -40,10 +40,14 @@ const AdminOrders = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
+      console.log('Attempting to update order status:', { orderId, newStatus });
       await dispatch(updateOrderStatus({ orderId, status: newStatus })).unwrap();
       toast.success(`Order status updated to ${newStatus}`);
+      // Refresh orders after successful update
+      dispatch(fetchAllOrders({ page: 1, limit: 20 }));
     } catch (error) {
-      toast.error(error || 'Failed to update order status');
+      console.error('Order status update failed:', error);
+      toast.error(typeof error === 'string' ? error : 'Failed to update order status');
     }
   };
 

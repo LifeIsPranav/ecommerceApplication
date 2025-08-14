@@ -29,6 +29,16 @@ const Home = () => {
     console.error('Home component error:', error);
   }
 
+  useEffect(() => {
+    dispatch(fetchFeaturedProducts());
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  // Add error boundary check
+  if (error) {
+    console.error('Home component error:', error);
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

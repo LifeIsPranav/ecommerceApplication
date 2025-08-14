@@ -6,7 +6,7 @@ export const fetchUserProfile = createAsyncThunk(
   'admin/fetchUserProfile',
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/api/users/${userId}`);
+      const response = await api.get(`/users/${userId}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -21,7 +21,7 @@ export const fetchAllUsers = createAsyncThunk(
   async (params = {}, { rejectWithValue }) => {
     try {
       const queryString = new URLSearchParams(params).toString();
-      const response = await api.get(`/api/users/admin/all?${queryString}`);
+      const response = await api.get(`/users/admin/all?${queryString}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -35,7 +35,7 @@ export const updateUserRole = createAsyncThunk(
   'admin/updateUserRole',
   async ({ userId, role }, { rejectWithValue }) => {
     try {
-      const response = await api.put(`/api/users/admin/${userId}/role`, { role });
+      const response = await api.put(`/users/admin/${userId}/role`, { role });
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -49,7 +49,7 @@ export const deleteUser = createAsyncThunk(
   'admin/deleteUser',
   async (userId, { rejectWithValue }) => {
     try {
-      await api.delete(`/api/users/admin/${userId}`);
+      await api.delete(`/users/admin/${userId}`);
       return userId;
     } catch (error) {
       return rejectWithValue(
@@ -63,7 +63,7 @@ export const getDashboardStats = createAsyncThunk(
   'admin/getDashboardStats',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get('/api/users/admin/dashboard-stats');
+      const response = await api.get('/users/admin/dashboard-stats');
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -77,7 +77,7 @@ export const getRevenueStats = createAsyncThunk(
   'admin/getRevenueStats',
   async (period = '30d', { rejectWithValue }) => {
     try {
-      const response = await api.get(`/api/users/admin/revenue-stats?period=${period}`);
+      const response = await api.get(`/users/admin/revenue-stats?period=${period}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -91,7 +91,7 @@ export const getTopProducts = createAsyncThunk(
   'admin/getTopProducts',
   async (limit = 10, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/api/products/admin/top-products?limit=${limit}`);
+      const response = await api.get(`/products/admin/top-products?limit=${limit}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -105,7 +105,7 @@ export const getRecentOrders = createAsyncThunk(
   'admin/getRecentOrders',
   async (limit = 10, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/api/orders/admin/recent?limit=${limit}`);
+      const response = await api.get(`/orders/admin/recent?limit=${limit}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -162,7 +162,7 @@ export const getLowStockProducts = createAsyncThunk(
   'admin/getLowStockProducts',
   async (threshold = 10, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/api/products/admin/low-stock?threshold=${threshold}`);
+      const response = await api.get(`/products/admin/low-stock?threshold=${threshold}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -176,7 +176,7 @@ export const getUserAnalytics = createAsyncThunk(
   'admin/getUserAnalytics',
   async (period = '30d', { rejectWithValue }) => {
     try {
-      const response = await api.get(`/api/users/admin/analytics?period=${period}`);
+      const response = await api.get(`/users/admin/analytics?period=${period}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(

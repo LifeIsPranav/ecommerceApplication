@@ -19,7 +19,6 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import React, { useEffect } from "react";
 import Register from "./pages/auth/Register";
 import Search from "./pages/Search";
-import TestProducts from "./pages/TestProducts";
 import Wishlist from "./pages/Wishlist";
 import WishlistAuthSync from "./components/common/WishlistAuthSync";
 import { Toaster } from "react-hot-toast";
@@ -51,7 +50,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/test-products" element={<TestProducts />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/about" element={<About />} />
